@@ -1,3 +1,6 @@
 from django.contrib import admin
+from calculadoras.models import Inversion, Prestamo
 
-# Register your models here.
+admin.site.register(Inversion)
+
+admin.site.register(Prestamo)
