@@ -1,5 +1,3 @@
 __pycache__/
-core/settings.py
-tkinter/
-migrations/
-db.sqlite3
+tkinter/calc/env/
+tkinter/calc/app.py
