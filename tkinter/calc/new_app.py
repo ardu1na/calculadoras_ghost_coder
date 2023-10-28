@@ -229,13 +229,18 @@ class IndexFrame(customtkinter.CTkFrame):
         self.button_inversiones = customtkinter.CTkButton(self.texto_frame, corner_radius=45, width=95,  height=95, text="Inversiones", font=("Purisa", 36), command=self.open_inversiones)
         self.button_inversiones.grid(row=4, column=2, padx=70, pady=0, sticky="ew",  columnspan=1)    
         
-        self.button_ayuda = customtkinter.CTkButton(self.texto_frame, corner_radius=45, width=95,  height=95, text="Ayuda", font=("Purisa", 36))
+        self.button_ayuda = customtkinter.CTkButton(self.texto_frame, corner_radius=45, width=95,  height=95, text="Salir", font=("Purisa", 36), command=self.salir)
         self.button_ayuda.grid(row=5, column=1, padx=70, pady=(10,70), sticky="ew",  columnspan=1) 
         
         self.button_about = customtkinter.CTkButton(self.texto_frame, corner_radius=45, width=95,  height=95, text="Acerca de", font=("Purisa", 36), command=self.open_acercade)
         self.button_about.grid(row=5, column=2, padx=70, pady=(10,70), sticky="ew",   columnspan=1)
         self.toplevel_window = None
-
+        
+    def salir(self):
+        master = self.master
+        self.pack_forget() 
+        master.master.destroy()
+        
     def open_acercade(self):
         master = self.master
         self.pack_forget()
@@ -354,3 +359,4 @@ app = App()
 # le damos play:
 app.mainloop()
 
+# TODO PROBAR EN ABOUT COLOCARLOS LABELS EN SUPROPIO FRAME
