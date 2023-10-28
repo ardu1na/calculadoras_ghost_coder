@@ -314,6 +314,8 @@ class App(customtkinter.CTk):
 
         self.geometry(f"{screen_width}x{screen_height}")
         self.title("Calculadoras")
+        self.iconbitmap(r'C:\Users\merce\OneDrive\Documentos\code\projects\calcul\tkinter\calc\redondo.ico')
+        self.wm_iconbitmap(r'C:\Users\merce\OneDrive\Documentos\code\projects\calcul\tkinter\calc\redondo.ico')
 
         self.create_widgets()
         
@@ -339,7 +341,6 @@ class App(customtkinter.CTk):
 
 
 app = App()
-app.iconbitmap(r'C:\Users\merce\OneDrive\Documentos\code\projects\calcul\tkinter\calc\favicon.ico')
 
 app.mainloop()
 
