@@ -2,6 +2,8 @@ import customtkinter
 import tkinter as tk
 from PIL import Image
 
+
+### INCLUDES  #### estos van en Ventana, asi que se incluyen en todas las vistas #######
 class HeaderFrame(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
@@ -11,61 +13,6 @@ class HeaderFrame(customtkinter.CTkFrame):
         self.image_label = customtkinter.CTkLabel(self, image=self.image, text="",)
         self.image_label.pack(fill=tk.X, expand=True, padx=0, pady=0)
         
-class AcercaDeFrame(customtkinter.CTkFrame):
-    def __init__(self, master):
-        super().__init__(master)
-        self.grid_columnconfigure((0, 1,2), weight=1)
-        self.grid_rowconfigure((0,1), weight=1)
-        
-        self.columna1 = customtkinter.CTkFrame(self, fg_color="azure", corner_radius=25)
-        self.columna1.grid(row=0, column=0, pady=10, padx=5)
-        
-        self.columna2 = customtkinter.CTkFrame(self, fg_color="snow", corner_radius=25)
-        self.columna2.grid(row=0, column=1, pady=10, padx=5)
-        
-        self.columna3 = customtkinter.CTkFrame(self, fg_color="azure", corner_radius=25)
-        self.columna3.grid(row=0, column=2, pady=10, padx=5)
-        
-        
-        
-        self.label_texto = customtkinter.CTkLabel(self.columna1, text="Calculadoras Financieras",font=("Purisa",24), text_color="turquoise1")
-        self.label_texto.grid(row=0, column=0, padx=10, pady=10)
-        
-        self.texto_largo = customtkinter.CTkLabel(self.columna1, fg_color="transparent", text="Bienvenido a la Aplicación Financiera, \n tu compañero confiable en el mundo de las finanzas personales.\n Nuestra aplicación está diseñada para brindarte herramientas poderosas que \n te ayudarán a tomar decisiones financieras informadas y maximizar tus recursos.", text_color="grey72", font=("Purisa", 15))
-        self.texto_largo.grid(row=1, column=0, padx=10, pady=10)  
-        
-               
-        
-        
-        self.subtitulo_label0 = customtkinter.CTkLabel(self.columna2,fg_color="transparent",  text="Calculadora de Cuotas y Pérdida en Intereses", text_color="turquoise1", font=("Purisa", 16))
-        self.subtitulo_label0.grid(row=0, column=0, padx=10, pady=10)  
-        
-        self.texto_largo2 = customtkinter.CTkLabel(self.columna2, fg_color="transparent", text="Diseñada para aquellos que buscan administrar préstamos o financiamientos. \n Con esta herramienta, puedes calcular cuotas mensuales, plazos y,\n lo más importante, el valor de pérdida en intereses a lo largo del tiempo.\n Visualiza claramente cómo tus decisiones financieras afectarán \ntu presupuesto a largo plazo y toma decisiones inteligentes.", text_color="grey72", font=("Purisa", 16))
-        self.texto_largo2.grid(row=1, column=0, padx=10, pady=10)  
-        
-        
-        
-        
-        self.subtitulo_label = customtkinter.CTkLabel(self.columna3,fg_color="transparent",  text="Calculadora de Inversiones y Valor de Retorno", text_color="aquamarine", font=("Purisa", 10))
-        self.subtitulo_label.grid(row=0, column=0, padx=10, pady=10)  
-        
-        
-        self.texto_largo3 = customtkinter.CTkLabel(self.columna3, fg_color="transparent", text="Pensada para quienes desean invertir y hacer crecer su dinero.\n Con esta herramienta, podrás calcular el valor de retorno de tus inversiones, lo que te permitirá planificar tu futuro financiero con confianza. \n Comprende cómo tus inversiones pueden crecer con el tiempo y toma decisiones estratégicas para alcanzar tus metas financieras.", text_color="grey72", font=("Purisa", 10))
-        self.texto_largo3.grid(row=1, column=0, padx=10,  pady=10) 
-        
-        
-        
-        ### botonera       
-        
-        self.button_volver = customtkinter.CTkButton(self, corner_radius=45, width=95,  height=95, text="Volver", font=("Purisa", 16), command=self.volver)
-        self.button_volver.grid(row=2, column=1)
-        
-    def volver(self):
-        master = self.master
-        self.pack_forget()
-        index = IndexFrame(master)
-        index.pack(fill=tk.BOTH, expand=True)
-         
 class FooterImageFrame(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
@@ -74,7 +21,9 @@ class FooterImageFrame(customtkinter.CTkFrame):
                                   size=(1900, 24))
         self.image_label = customtkinter.CTkLabel(self, image=self.image, text="")
         self.image_label.pack(fill=tk.X, expand=True, padx=0, pady=0)
-            
+           
+############################# VISTAS  #########
+# CALCULADORA INVERSIONES  
 class InversionesFrame(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
@@ -151,8 +100,7 @@ class InversionesFrame(customtkinter.CTkFrame):
         index = IndexFrame(master)
         index.pack(fill=tk.X, expand=True)
  
-        
-            
+# CALCULADORA PRESTAMOS  
 class PrestamosFrame(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
@@ -253,8 +201,9 @@ class PrestamosFrame(customtkinter.CTkFrame):
         self.pack_forget()
         index = IndexFrame(master)
         index.pack(fill=tk.X, expand=True)
-            
-            
+
+           
+## INICIO   
 class IndexFrame(customtkinter.CTkFrame):
     def __init__(self, master):
         
@@ -306,6 +255,67 @@ class IndexFrame(customtkinter.CTkFrame):
         inversiones_frame = InversionesFrame(master)
         inversiones_frame.pack(fill=tk.BOTH, expand=True)
 
+
+## ABOUT
+class AcercaDeFrame(customtkinter.CTkFrame):
+    def __init__(self, master):
+        super().__init__(master)
+        self.grid_columnconfigure((0, 1,2), weight=1)
+        self.grid_rowconfigure((0,1), weight=1)
+        
+        self.columna1 = customtkinter.CTkFrame(self, fg_color="azure", corner_radius=25)
+        self.columna1.grid(row=0, column=0, pady=10, padx=5)
+        
+        self.columna2 = customtkinter.CTkFrame(self, fg_color="snow", corner_radius=25)
+        self.columna2.grid(row=0, column=1, pady=10, padx=5)
+        
+        self.columna3 = customtkinter.CTkFrame(self, fg_color="azure", corner_radius=25)
+        self.columna3.grid(row=0, column=2, pady=10, padx=5)
+        
+        
+        
+        self.label_texto = customtkinter.CTkLabel(self.columna1, text="Calculadoras Financieras",font=("Purisa",24), text_color="turquoise1")
+        self.label_texto.grid(row=0, column=0, padx=10, pady=10)
+        
+        self.texto_largo = customtkinter.CTkLabel(self.columna1, fg_color="transparent", text="Bienvenido a la Aplicación Financiera, \n tu compañero confiable en el mundo de las finanzas personales.\n Nuestra aplicación está diseñada para brindarte herramientas poderosas que \n te ayudarán a tomar decisiones financieras informadas y maximizar tus recursos.", text_color="grey72", font=("Purisa", 15))
+        self.texto_largo.grid(row=1, column=0, padx=10, pady=10)  
+        
+               
+        
+        
+        self.subtitulo_label0 = customtkinter.CTkLabel(self.columna2,fg_color="transparent",  text="Calculadora de Cuotas y Pérdida en Intereses", text_color="turquoise1", font=("Purisa", 16))
+        self.subtitulo_label0.grid(row=0, column=0, padx=10, pady=10)  
+        
+        self.texto_largo2 = customtkinter.CTkLabel(self.columna2, fg_color="transparent", text="Diseñada para aquellos que buscan administrar préstamos o financiamientos. \n Con esta herramienta, puedes calcular cuotas mensuales, plazos y,\n lo más importante, el valor de pérdida en intereses a lo largo del tiempo.\n Visualiza claramente cómo tus decisiones financieras afectarán \ntu presupuesto a largo plazo y toma decisiones inteligentes.", text_color="grey72", font=("Purisa", 16))
+        self.texto_largo2.grid(row=1, column=0, padx=10, pady=10)  
+        
+        
+        
+        
+        self.subtitulo_label = customtkinter.CTkLabel(self.columna3,fg_color="transparent",  text="Calculadora de Inversiones y Valor de Retorno", text_color="aquamarine", font=("Purisa", 10))
+        self.subtitulo_label.grid(row=0, column=0, padx=10, pady=10)  
+        
+        
+        self.texto_largo3 = customtkinter.CTkLabel(self.columna3, fg_color="transparent", text="Pensada para quienes desean invertir y hacer crecer su dinero.\n Con esta herramienta, podrás calcular el valor de retorno de tus inversiones, lo que te permitirá planificar tu futuro financiero con confianza. \n Comprende cómo tus inversiones pueden crecer con el tiempo y toma decisiones estratégicas para alcanzar tus metas financieras.", text_color="grey72", font=("Purisa", 10))
+        self.texto_largo3.grid(row=1, column=0, padx=10,  pady=10) 
+        
+        
+        
+        ### botonera       
+        
+        self.button_volver = customtkinter.CTkButton(self, corner_radius=45, width=95,  height=95, text="Volver", font=("Purisa", 16), command=self.volver)
+        self.button_volver.grid(row=2, column=1)
+        
+    def volver(self):
+        master = self.master
+        self.pack_forget()
+        index = IndexFrame(master)
+        index.pack(fill=tk.BOTH, expand=True)
+         
+
+################## CLASE PRINCIPAL . APLICACIÓN ###############
+
+## Ventana
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
@@ -339,8 +349,8 @@ class App(customtkinter.CTk):
         
         
 
-
+### se crea una instancia de la clase App:
 app = App()
-
+# le damos play:
 app.mainloop()
 
