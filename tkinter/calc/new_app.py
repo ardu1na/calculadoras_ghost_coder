@@ -315,16 +315,46 @@ class AcercaDeFrame(customtkinter.CTkFrame):
         
         
         
-        self.button_prev = customtkinter.CTkButton(self.texto_frame, corner_radius=45,width=125,  height=75, text="Anterior", font=("Purisa", 36))#, command=self.open_prestamos)
+        self.button_prev = customtkinter.CTkButton(self.texto_frame, corner_radius=45,width=125,  height=75, text="Anterior", font=("Purisa", 36), command=self.prev_text)
         self.button_prev.grid(row=4, column=1, padx=70, pady=0, sticky="ew",  columnspan=1)  
         
-        self.button_next = customtkinter.CTkButton(self.texto_frame, corner_radius=45, width=125,  height=75, text="Siguiente", font=("Purisa", 36)) #, command=self.next_page)
+        self.button_next = customtkinter.CTkButton(self.texto_frame, corner_radius=45, width=125,  height=75, text="Siguiente", font=("Purisa", 36), command=self.next_text)
         self.button_next.grid(row=4, column=2, padx=70, pady=0, sticky="ew",  columnspan=1)    
         
         
         
         self.button_volver = customtkinter.CTkButton(self, corner_radius=45, width=95,  height=95, text="Volver", font=("Purisa", 36), command=self.volver)
         self.button_volver.grid(row=2, column=0)
+        
+        self.current_content_index = 0
+
+        self.content = [
+            {
+                "titulo": "Calculadoras Financieras Python App",
+                "texto": "Aquí encontrarás información sobre el proyecto. Navega entre los diferentes textos con los botones 'anterior' y 'siguiente'."
+            },
+            {
+                "titulo": "Next Title",
+                "texto": "This is the next content to display."
+            },
+        ]
+
+        self.update_content()
+
+    def update_content(self):
+        content_data = self.content[self.current_content_index]
+        self.titulo_label.configure(text=content_data["titulo"])
+        self.text_label.configure(text=content_data["texto"])
+
+    def prev_text(self):
+        if self.current_content_index > 0:
+            self.current_content_index -= 1
+            self.update_content()
+
+    def next_text(self):
+        if self.current_content_index < len(self.content) - 1:
+            self.current_content_index += 1
+            self.update_content()
         
     def volver(self):
         master = self.master
