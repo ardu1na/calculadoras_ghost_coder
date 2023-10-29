@@ -100,12 +100,29 @@ class InversionesFrame(customtkinter.CTkFrame):
         self.button_prestamos = customtkinter.CTkButton(self.columna3, corner_radius=45, width=95,  height=95, text="Calcular ganancias", font=("Purisa", 36), command=self.calcular_ganancia)
         self.button_prestamos.grid(row=4, column=1, padx=10, pady=10, sticky="ew",  columnspan=1)  
 
-        self.button_ayuda = customtkinter.CTkButton(self.columna3, corner_radius=45, width=95,  height=95, text="Ayuda", font=("Purisa", 36))
+        self.button_ayuda = customtkinter.CTkButton(self.columna3, corner_radius=45, width=95,  height=95, text="Ayuda", font=("Purisa", 36), command=self.ayuda)
         self.button_ayuda.grid(row=6, column=1, padx=10, pady=10, sticky="ew",  columnspan=1)  
         
         self.button_volver = customtkinter.CTkButton(self.columna3, corner_radius=45, width=95,  height=95, text="Volver", font=("Purisa", 36), command=self.volver)
         self.button_volver.grid(row=8, column=1, padx=10, pady=(10,0), sticky="ew",  columnspan=1)
         
+    def ayuda(self):
+        self.pack_forget()
+        new_content = [
+        {
+            "titulo": "FAQs Calculadora Inversiones",
+            "texto": "Aquí encontrarás una serie de arespuestas a las preguntas frecuentes. \n Navega con los botones 'anterior' y 'siguiente' para leer los textos."
+        },
+        {
+            "titulo": "Custom Title 2",
+            "texto": "Custom Text 2"
+        },
+        ]
+        
+        ayuda = AyudaBaseFrame(self.master, custom_content=new_content, previous_frame=self)
+        ayuda.pack(fill=tk.X, expand=True)
+        
+            
     def calcular_ganancia(self):
         try:
             monto_inicial = float(self.entrada_monto.get())
@@ -414,7 +431,7 @@ class AcercaDeFrame(customtkinter.CTkFrame):
         index = IndexFrame(master)
         index.pack(fill=tk.X, expand=True)
         
-         
+## como las otras ventanas también tienen su propia sección de ayuda, vamos a usarla de modelo, creamos una clase base heredando de la ventana de acercade general, y le pasamos las variables necesarias para el correcto funcionamiento de cada caso específico        
 class AyudaBaseFrame(AcercaDeFrame):
     def __init__(self, master, custom_content, previous_frame):
         super().__init__(master)
