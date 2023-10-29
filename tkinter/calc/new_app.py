@@ -205,7 +205,7 @@ class PrestamosFrame(customtkinter.CTkFrame):
         self.button_prestamos = customtkinter.CTkButton(self.columna3, corner_radius=45, width=95,  height=95, text="Calcular intereses", font=("Purisa", 36), command=self.calcular_interes)
         self.button_prestamos.grid(row=4, column=1, padx=10, pady=10, sticky="ew",  columnspan=1)  
 
-        self.button_ayuda = customtkinter.CTkButton(self.columna3, corner_radius=45, width=95,  height=95, text="Ayuda", font=("Purisa", 36))
+        self.button_ayuda = customtkinter.CTkButton(self.columna3, corner_radius=45, width=95,  height=95, text="Ayuda", font=("Purisa", 36), command=self.ayuda)
         self.button_ayuda.grid(row=6, column=1, padx=10, pady=10, sticky="ew",  columnspan=1)  
         
         self.button_volver = customtkinter.CTkButton(self.columna3, corner_radius=45, width=95,  height=95, text="Volver", font=("Purisa", 36), command=self.volver)
@@ -232,7 +232,22 @@ class PrestamosFrame(customtkinter.CTkFrame):
         self.pack_forget()
         index = IndexFrame(master)
         index.pack(fill=tk.X, expand=True)
-
+        
+    def ayuda(self):
+        self.pack_forget()
+        new_content = [
+        {
+            "titulo": "FAQs Calculadora préstamos",
+            "texto": "Aquí encontrarás una serie de arespuestas a las preguntas frecuentes. \n Navega con los botones 'anterior' y 'siguiente' para leer los textos."
+        },
+        {
+            "titulo": "Custom Title 2",
+            "texto": "Custom Text 2"
+        },
+        ]
+        
+        ayuda = AyudaBaseFrame(self.master, custom_content=new_content, previous_frame=self)
+        ayuda.pack(fill=tk.X, expand=True)
            
 ## INICIO   
 class IndexFrame(customtkinter.CTkFrame):
@@ -296,47 +311,84 @@ class AcercaDeFrame(customtkinter.CTkFrame):
     def __init__(self, master):
         
         super().__init__(master)
-        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure((0,1 ,2), weight=1)
         self.grid_rowconfigure((0,1 ,2), weight=1)
         
-        self.texto_frame = customtkinter.CTkFrame(self, fg_color="azure", corner_radius=55)
-        self.texto_frame.grid(row=0, column=0, padx=10, pady=80)
+        
+        ### contenedor de los textos
+        self.texto_frame = customtkinter.CTkFrame(self, fg_color="azure", corner_radius=45)
+        self.texto_frame.grid(row=0, column=0, padx=10, pady=10, columnspan=3)
         self.texto_frame.grid_columnconfigure((0, 1,2,3), weight=1)
         self.texto_frame.grid_rowconfigure((0,1 ,2), weight=1)
         
         
+        
+        ### textos dinámicos
         self.titulo_label = customtkinter.CTkLabel(self.texto_frame, text="Calculadoras Financieras Python App", text_color="grey72", font=("Purisa", 36))
         self.titulo_label.grid(row=0, column=1, padx=170, pady=(70,10), sticky="ew",  columnspan=2)  
         
         self.text_label = customtkinter.CTkLabel(self.texto_frame, text_color="grey72", text="Aquí encontrarás información sobre el proyecto. \n Navega entre los diferentes textos con los botones 'anterior' y 'siguiente'.", font=("Purisa", 26))
         self.text_label.grid(row=1, column=1, padx=70, pady=(10,60), sticky="ew",  columnspan=2)  
+        ###
         
         
         
+        # naveegacion entre los textos
+
+        self.current_content_index = 0
+
+        
+        self.botonera = customtkinter.CTkFrame(self, fg_color="transparent")
+        self.botonera.grid(row=1, column=0, padx=5, pady=0, columnspan=3)
+        self.botonera.grid_columnconfigure((0, 1,2,3), weight=1)
+        self.botonera.grid_rowconfigure((0,1 ,2), weight=1)
         
         
-        self.button_prev = customtkinter.CTkButton(self.texto_frame, corner_radius=45,width=125,  height=75, text="Anterior", font=("Purisa", 36), command=self.prev_text)
-        self.button_prev.grid(row=4, column=1, padx=70, pady=0, sticky="ew",  columnspan=1)  
+        self.button_prev = customtkinter.CTkButton(self.botonera, corner_radius=75,width=75,  height=70, text="Anterior <", font=("Purisa", 26), command=self.prev_text)
+        self.button_prev.grid(row=0, column=0, padx=70, pady=10, sticky="ew",  columnspan=1)  
         
-        self.button_next = customtkinter.CTkButton(self.texto_frame, corner_radius=45, width=125,  height=75, text="Siguiente", font=("Purisa", 36), command=self.next_text)
-        self.button_next.grid(row=4, column=2, padx=70, pady=0, sticky="ew",  columnspan=1)    
-        
+        self.button_next = customtkinter.CTkButton(self.botonera, corner_radius=75, width=75,  height=70, text="> Siguiente", font=("Purisa", 26), command=self.next_text)
+        self.button_next.grid(row=0, column=3, padx=70, pady=10, sticky="ew",  columnspan=1)    
         
         
         self.button_volver = customtkinter.CTkButton(self, corner_radius=45, width=95,  height=95, text="Volver", font=("Purisa", 36), command=self.volver)
-        self.button_volver.grid(row=2, column=0)
+        self.button_volver.grid(row=4, column=0, columnspan=3, pady=(0,20))
         
-        self.current_content_index = 0
-
+        
+        #### anadir las páginas que sean necesarias
         self.content = [
-            {
+            {   # pagina 1
                 "titulo": "Calculadoras Financieras Python App",
-                "texto": "Aquí encontrarás información sobre el proyecto. Navega entre los diferentes textos con los botones 'anterior' y 'siguiente'."
+                "texto": "Aquí encontrarás información sobre el proyecto.\n Navega entre los diferentes textos con los botones 'anterior' y 'siguiente'."
             },
-            {
+            {   # pagina 2
+                "titulo": "Next Title",
+                "texto": "This is the next content to display."
+            },"""
+            ,
+            { # pagina 3
                 "titulo": "Next Title",
                 "texto": "This is the next content to display."
             },
+            { # pagina 2
+                "titulo": "Next Title",
+                "texto": "This is the next content to display."
+            },
+            { # pagina 2
+                "titulo": "Next Title",
+                "texto": "This is the next content to display."
+            },
+            
+            { # pagina 2
+                "titulo": "Next Title",
+                "texto": "This is the next content to display."
+            },
+            { # pagina 2
+                "titulo": "Next Title",
+                "texto": "This is the next content to display."
+            },
+            
+            """
         ]
 
         self.update_content()
@@ -355,7 +407,7 @@ class AcercaDeFrame(customtkinter.CTkFrame):
         if self.current_content_index < len(self.content) - 1:
             self.current_content_index += 1
             self.update_content()
-        
+    
     def volver(self):
         master = self.master
         self.pack_forget()
@@ -363,6 +415,28 @@ class AcercaDeFrame(customtkinter.CTkFrame):
         index.pack(fill=tk.X, expand=True)
         
          
+class AyudaBaseFrame(AcercaDeFrame):
+    def __init__(self, master, custom_content, previous_frame):
+        super().__init__(master)
+
+        self.content = custom_content
+
+        self.current_content_index = 0
+        
+        self.update_content()
+        
+        self.previous_frame = previous_frame
+
+    def volver(self):
+        if self.previous_frame:
+            self.pack_forget()
+            self.previous_frame.pack(fill=tk.X, expand=True)
+        
+        
+        
+        
+        
+        
 
 ################## CLASE PRINCIPAL . APLICACIÓN ###############
 
@@ -386,15 +460,18 @@ class App(customtkinter.CTk):
         container.grid_rowconfigure(1, weight=1)
         container.grid_columnconfigure(0, weight=1)
         
-            
+        # CABECERA  -fijo
         self.header = HeaderFrame(container)
         self.header.pack(fill=tk.X, expand=True)
 
+        ### BODY - dinámico
+        #  esta es la parte que vamos a poblar dinámicamente
+        # desempaquetando (ver el método pack en la manifestación de la instancia de la clase)
         self.index = IndexFrame(container)
         self.index.pack(fill=tk.BOTH, expand=True)
+        ###
         
-        
-        
+        # FOOTER -fijo
         self.footerline = FooterImageFrame(container)
         self.footerline.pack(fill=tk.X, expand=True, side="bottom")
         
@@ -405,4 +482,3 @@ app = App()
 # le damos play:
 app.mainloop()
 
-# TODO PROBAR EN ABOUT COLOCARLOS LABELS EN SUPROPIO FRAME
