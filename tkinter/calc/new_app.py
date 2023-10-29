@@ -33,66 +33,96 @@ class InversionesFrame(customtkinter.CTkFrame):
         
         
         #### INPUT
-        self.columna1 = customtkinter.CTkFrame(self)
-        self.columna1.grid(row=1, column=1)
+        self.columna1 = customtkinter.CTkFrame(self, fg_color="white", corner_radius=55)
+        self.columna1.grid(row=1, column=1, pady=20)
+        self.columna1.grid_columnconfigure(1, weight=1)
+        self.columna1.grid_rowconfigure((0,1 ,2), weight=1)
         
-        self.entrada_monto = customtkinter.CTkEntry(self.columna1, placeholder_text="MONTO DE LA INVERSIÓN",font=("Purisa",24), width=350, height=80, corner_radius=55)
-        self.entrada_monto.grid(row=1, column=0, padx=10, pady=10)
+        self.label_monto = customtkinter.CTkLabel(self.columna1, text="Monto a invertir",font=("Purisa",24), text_color="grey72")
+        self.label_monto.grid(row=0, column=0, padx=0,pady=(70,10))
+        self.entrada_monto = customtkinter.CTkEntry(self.columna1, fg_color="white",placeholder_text_color="aquamarine",placeholder_text="$ ____________________________________________________________________________",font=("Purisa",44), border_width=0, width=450, height=100, corner_radius=55, text_color="aquamarine")
+        self.entrada_monto.grid(row=1, column=0, padx=0, pady=10)
 
 
-        self.entrada_n_cuotas = customtkinter.CTkEntry(self.columna1, placeholder_text="MESES",font=("Purisa",24), width=350, height=80, corner_radius=55)
-        self.entrada_n_cuotas.grid(row=4, column=0, padx=10, pady=10)
+        self.label_n_cuotas = customtkinter.CTkLabel(self.columna1, text="N° meses",font=("Purisa",24), text_color="grey72")
+        self.label_n_cuotas.grid(row=3, column=0, padx=0, pady=10)
+        self.entrada_n_cuotas = customtkinter.CTkEntry(self.columna1,placeholder_text_color="aquamarine", fg_color="white", placeholder_text="____________________________________________________________________________",font=("Purisa",44), border_width=0, width=450, height=100, corner_radius=55, text_color="aquamarine")
+        self.entrada_n_cuotas.grid(row=4, column=0, padx=0, pady=10)
 
-        self.entrada_valor_cuota = customtkinter.CTkEntry(self.columna1, placeholder_text="RETRNO ANUAL",font=("Purisa",24), width=350, height=80, corner_radius=55)
-        self.entrada_valor_cuota.grid(row=7, column=0, padx=10, pady=10)
+        self.label_valor_cuota = customtkinter.CTkLabel(self.columna1, text="Tasa de interés",font=("Purisa",24), text_color="grey72")
+        self.label_valor_cuota.grid(row=6, column=0, padx=0, pady=10)
+        self.entrada_tasa = customtkinter.CTkEntry(self.columna1, fg_color="white", placeholder_text="% ____________________________________________________________________________", placeholder_text_color="aquamarine",font=("Purisa",44), border_width=0, width=450, height=100, corner_radius=55, text_color="aquamarine")
+        self.entrada_tasa.grid(row=7, column=0, padx=10, pady=(10,70))
         
         
         
-        
-        self.columna2 = customtkinter.CTkFrame(self)
+        ############ COLUMNA 2 - RESULTADOS
+        self.columna2 = customtkinter.CTkFrame(self, fg_color="snow", corner_radius=55)
         self.columna2.grid(row=1, column=3)
+        self.columna2.grid_columnconfigure(1, weight=1)
+        self.columna2.grid_rowconfigure((0,1 ,2), weight=1)
         
         ### output
         
-        self.texto = customtkinter.CTkEntry(self.columna2, placeholder_text="Préstamos y Cuotificación",font=("Purisa",24), width=350, height=80, corner_radius=55, state="disabled")
-        self.texto.grid(row=1, column=0, padx=10, pady=10)
+        self.label_salida1 = customtkinter.CTkLabel(self.columna2, text="Retorno anual",font=("Purisa",24), text_color="grey72")
+        self.label_salida1.grid(row=1, column=0, padx=0,pady=(70,10))
+                
+        self.salida_1 = customtkinter.CTkEntry(self.columna2, fg_color="snow",placeholder_text_color="turquoise1", placeholder_text="$ ____________________________________________________________________________",font=("Purisa",44),border_width=0,width=350, height=20, corner_radius=55)
+        self.salida_1.grid(row=3, column=0, padx=20, pady=10)
         
-        self.salida_1 = customtkinter.CTkEntry(self.columna2, placeholder_text="",font=("Purisa",24), width=350, height=80, corner_radius=55, state="disabled")
-        self.salida_1.grid(row=3, column=0, padx=10, pady=10)
         
-        self.salida_2 = customtkinter.CTkEntry(self.columna2, placeholder_text="",font=("Purisa",24), width=350, height=80, corner_radius=55, state="disabled")
-        self.salida_2.grid(row=5, column=0, padx=10, pady=10)
+        self.label_salida2 = customtkinter.CTkLabel(self.columna2, text="Retorno del periodo",font=("Purisa",24), text_color="grey72")
+        self.label_salida2.grid(row=4, column=0, padx=0,pady=(70,10))
+        
+        self.salida_2 = customtkinter.CTkEntry(self.columna2, fg_color="snow",placeholder_text_color="turquoise1",placeholder_text="$ ____________________________________________________________________________",font=("Purisa",44),border_width=0, width=350, height=20, corner_radius=55)
+        self.salida_2.grid(row=5, column=0, padx=20, pady=10)
+
+        
+        
+        self.label_salida3 = customtkinter.CTkLabel(self.columna2, text="ALGO",font=("Purisa",24), text_color="grey72")
+        self.label_salida3.grid(row=6, column=0, padx=0,pady=(70,10))
+        
+        self.salida_3 = customtkinter.CTkEntry(self.columna2, fg_color="snow",placeholder_text_color="turquoise1", placeholder_text="% ____________________________________________________________________________",font=("Purisa",44),border_width=0, width=350, height=20, corner_radius=55)
+        self.salida_3.grid(row=7, column=0, padx=20, pady=(10,70))
+       # TODO:AÑADIR ALGO
 
        
 
         ### botonera
          
-        self.columna3 = customtkinter.CTkFrame(self)
-        self.columna3.grid(row=1, column=5)
-        self.button_prestamos = customtkinter.CTkButton(self.columna3, corner_radius=45, width=95,  height=95, text="Calcular intereses", font=("Purisa", 36), command=self.calcular_interes)
+        self.columna3 = customtkinter.CTkFrame(self, fg_color="transparent", corner_radius=55)
+        self.columna3.grid(row=1, column=5, pady=40)
+        
+        self.label_texto = customtkinter.CTkLabel(self.columna3, text="Inversiones",font=("Purisa",44), text_color="white")
+        self.label_texto.grid(row=3, column=1, padx=10,pady=10)
+        
+        
+        self.button_prestamos = customtkinter.CTkButton(self.columna3, corner_radius=45, width=95,  height=95, text="Calcular ganancias", font=("Purisa", 36), command=self.calcular_ganancia)
         self.button_prestamos.grid(row=4, column=1, padx=10, pady=10, sticky="ew",  columnspan=1)  
 
         self.button_ayuda = customtkinter.CTkButton(self.columna3, corner_radius=45, width=95,  height=95, text="Ayuda", font=("Purisa", 36))
         self.button_ayuda.grid(row=6, column=1, padx=10, pady=10, sticky="ew",  columnspan=1)  
         
         self.button_volver = customtkinter.CTkButton(self.columna3, corner_radius=45, width=95,  height=95, text="Volver", font=("Purisa", 36), command=self.volver)
-        self.button_volver.grid(row=8, column=1, padx=10, pady=10, sticky="ew",  columnspan=1)
+        self.button_volver.grid(row=8, column=1, padx=10, pady=(10,0), sticky="ew",  columnspan=1)
         
-    def calcular_interes(self):
+    def calcular_ganancia(self):
         try:
-            monto = float(self.entrada_monto.get())
-            n_cuotas = int(self.entrada_n_cuotas.get())
-            valor_cuota = float(self.entrada_valor_cuota.get())
+            monto_inicial = float(self.entrada_monto.get())
+            tasa_interes = float(self.entrada_tasa.get())
+            periodo_meses = float(self.entrada_n_cuotas.get())
 
-            interes_total = (n_cuotas * valor_cuota) - monto
-            interes_mensual =  interes_total / n_cuotas
+            tasa_decimal = tasa_interes / 100
+            retorno_anual = tasa_decimal * monto_inicial
+            retorno_periodo = (periodo_meses * retorno_anual) / 12
 
-            self.salida_1.configure(placeholder_text=f"Diferencia total: \n${interes_total:.2f}")
-            self.salida_2.configure(placeholder_text=f"Interés mensual: \n ${interes_mensual:.2f}")
+            self.salida_1.configure(placeholder_text=f"$ {retorno_anual:.2f}")
+            self.salida_2.configure(placeholder_text=f"$ {retorno_periodo:.2f}")
+
         except ValueError:
-            self.texto.configure(placeholder_text="Error: Ingresa valores válidos")
-            
-    
+            self.label_texto.configure(text="Error: Ingresa valores válidos", text_color="red")    
+   
+                   
         
     def volver(self):
         master = self.master
@@ -133,7 +163,8 @@ class PrestamosFrame(customtkinter.CTkFrame):
         
         
         
-        
+                ############ COLUMNA 2 - RESULTADOS
+
         self.columna2 = customtkinter.CTkFrame(self, fg_color="snow", corner_radius=55)
         self.columna2.grid(row=1, column=3)
         self.columna2.grid_columnconfigure(1, weight=1)
@@ -223,18 +254,17 @@ class IndexFrame(customtkinter.CTkFrame):
         self.text_label = customtkinter.CTkLabel(self.texto_frame, text_color="grey72", text="¿Qué deseas calcular ahora?", font=("Purisa", 26))
         self.text_label.grid(row=1, column=1, padx=70, pady=(10,60), sticky="ew",  columnspan=2)  
         
-        self.button_prestamos = customtkinter.CTkButton(self.texto_frame, corner_radius=45,width=95,  height=95, text="Préstamos", font=("Purisa", 36), command=self.open_prestamos)
+        self.button_prestamos = customtkinter.CTkButton(self.texto_frame, corner_radius=45,width=125,  height=75, text="Préstamos", font=("Purisa", 36), command=self.open_prestamos)
         self.button_prestamos.grid(row=4, column=1, padx=70, pady=0, sticky="ew",  columnspan=1)  
         
-        self.button_inversiones = customtkinter.CTkButton(self.texto_frame, corner_radius=45, width=95,  height=95, text="Inversiones", font=("Purisa", 36), command=self.open_inversiones)
+        self.button_inversiones = customtkinter.CTkButton(self.texto_frame, corner_radius=45, width=125,  height=75, text="Inversiones", font=("Purisa", 36), command=self.open_inversiones)
         self.button_inversiones.grid(row=4, column=2, padx=70, pady=0, sticky="ew",  columnspan=1)    
         
-        self.button_ayuda = customtkinter.CTkButton(self.texto_frame, corner_radius=45, width=95,  height=95, text="Salir", font=("Purisa", 36), command=self.salir)
+        self.button_ayuda = customtkinter.CTkButton(self.texto_frame, corner_radius=45, width=125,  height=75, text="Salir", font=("Purisa", 36), command=self.salir)
         self.button_ayuda.grid(row=5, column=1, padx=70, pady=(10,70), sticky="ew",  columnspan=1) 
         
-        self.button_about = customtkinter.CTkButton(self.texto_frame, corner_radius=45, width=95,  height=95, text="Acerca de", font=("Purisa", 36), command=self.open_acercade)
+        self.button_about = customtkinter.CTkButton(self.texto_frame, corner_radius=45, width=125,  height=75, text="Acerca de", font=("Purisa", 36), command=self.open_acercade)
         self.button_about.grid(row=5, column=2, padx=70, pady=(10,70), sticky="ew",   columnspan=1)
-        self.toplevel_window = None
         
     def salir(self):
         master = self.master
